@@ -1,7 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '../models/user.class';
-import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
+import {
+  DocumentData,
+  Firestore,
+  doc,
+  docData,
+  updateDoc,
+} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-edit-user',
@@ -20,7 +27,6 @@ export class DialogEditUserComponent implements OnInit {
 
   saveUser() {
     this.loading = true;
-    console.log(this.user);
 
     updateDoc(
       doc(this.firestore, 'users', '' + this.userId),

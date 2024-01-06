@@ -1,10 +1,20 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { DocumentData, Firestore, doc, getDoc } from '@angular/fire/firestore';
+import {
+  DocumentData,
+  Firestore,
+  collection,
+  collectionData,
+  collectionSnapshots,
+  doc,
+  docData,
+  getDoc,
+} from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../models/user.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
+import { Observable, ObservableInput, from } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,14 +25,26 @@ export class UserDetailComponent implements OnInit {
   userId: string | null = '';
   firestore: Firestore = inject(Firestore);
   user$: User = new User();
+  userData$: Observable<any[]>;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, public dialog: MatDialog) {
+    this.userData$ = collectionData(collection(this.firestore, 'users'), {
+      idField: 'id',
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap) => {
       this.userId = paramMap.get('id');
-      console.log(this.userId);
       this.getUser();
+    });
+
+    this.userData$.subscribe((changes: any[]) => {
+      changes.forEach((change) => {
+        if (change.id == this.userId) {
+          this.user$ = new User(change);
+        }
+      });
     });
   }
 
