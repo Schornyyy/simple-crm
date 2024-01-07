@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { User } from '../models/user.class';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Firestore, doc, updateDoc } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-edit-address',

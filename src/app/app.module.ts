@@ -30,6 +30,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DialogCreateNoticeComponent } from './dialog-create-notice/dialog-create-notice.component';
+import { DialogEditNoticeComponent } from './dialog-edit-notice/dialog-edit-notice.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     UserDetailComponent,
     DialogEditAddressComponent,
     DialogEditUserComponent,
+    DialogCreateNoticeComponent,
+    DialogEditNoticeComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +72,7 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
+    MatExpansionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

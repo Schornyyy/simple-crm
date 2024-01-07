@@ -16,6 +16,12 @@
   </div>
 </mat-card>
 
+<mat-card class="user-details-actions mt-32">
+  <button mat-flat-button color="primary" (click)="addNewNotice()">
+    Add Notice
+  </button>
+</mat-card>
+
 <mat-card class="mt-32">
   <button
     mat-icon-button
@@ -30,4 +36,53 @@
   <mat-card-title> Address</mat-card-title>
   {{ user$.street }}<br />
   {{ user$.zipCode }}, {{ user$.city }}
+</mat-card>
+
+<mat-card class="mt-32 notice-container">
+  <mat-card-title>Notices</mat-card-title>
+  <mat-accordion *ngFor="let notice of customerNotices; let i = index">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title> {{ notice.title }} </mat-panel-title>
+        <button
+          mat-icon-button
+          class="pin-upper-right-corner"
+          [matMenuTriggerFor]="noticeMenu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #noticeMenu="matMenu">
+          <button mat-menu-item (click)="editNotice(i)">Edit</button>
+        </mat-menu>
+      </mat-expansion-panel-header>
+      <p>{{ notice.notice }}</p>
+      <div class="notice-details">
+        <p>Erstellt am: {{ notice.createdAt }}</p>
+        <p>Letztes mal bearbeitet am: {{ notice.editedAt }}</p>
+      </div>
+      <div class="notice-bottom">
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="checkNotice(i)"
+          class="mr-16"
+          *ngIf="!notice.done"
+        >
+          Check
+        </button>
+        <button
+          mat-flat-button
+          color="accent"
+          (click)="checkNotice(i)"
+          class="mr-16"
+          *ngIf="notice.done"
+        >
+          Uncheck
+        </button>
+        <button mat-flat-button color="warn" (click)="deleteNotice(i)">
+          Delete
+        </button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </mat-card>

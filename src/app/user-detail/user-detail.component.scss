@@ -41,3 +41,29 @@ mat-card {
         height: 5px;
     }
 }
+
+.user-details-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    button {
+        width: 150px;
+    }
+}
+
+.notice-container {
+
+    .pin-upper-right-corner {
+        top: 0;
+        right: 0;
+    }
+
+}
+
+.notice-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: rgba($color: #000000, $alpha: .4);
+}

@@ -1,0 +1,46 @@
+<div class="form-container">
+  <h1 mat-dialog-title>Add Notice</h1>
+  <div mat-dialog-content>
+    <form class="example-form">
+      <div>
+        <mat-form-field class="mr-16 w-100" appearance="outline">
+          <mat-label>Title</mat-label>
+          <input
+            [disabled]="loading"
+            [(ngModel)]="this.notice.title"
+            matInput
+            name="title"
+            placeholder="Title"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="w-100" appearance="outline">
+          <mat-label>Description </mat-label>
+          <input
+            [disabled]="loading"
+            name="notice"
+            [(ngModel)]="this.notice.notice"
+            matInput
+            placeholder="Notice"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button [disabled]="loading" (click)="closeDialog()">
+      Cancel
+    </button>
+    <button
+      mat-button
+      cdkFocusInitial
+      (click)="saveNotice()"
+      [disabled]="loading"
+    >
+      Save
+    </button>
+  </div>
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+</div>
